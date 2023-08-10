@@ -8,9 +8,9 @@ const THEME = {
 		colorPrimary: "#c2c0ff",
 		fontFamily: "League Spartan, sans-serif, -apple-system, BlinkMacSystemFont,\n" +
 			"  \"Segoe UI\", \"Roboto\", \"Oxygen\", \"Ubuntu\", \"Cantarell\", \"Fira Sans\",\n" +
-			"  \"Droid Sans\", \"Helvetica Neue\""
+			"  \"Droid Sans\", \"Helvetica Neue\"",
 	},
-}
+};
 
 function App() {
 	return (

@@ -8,10 +8,10 @@ const MainPage = () => {
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.navigation}>
-				<Navigation/>
+				<Navigation />
 			</div>
 			<UploadForm />
-			<CardGroup/>
+			<CardGroup />
 		</div>
 	);
 };
