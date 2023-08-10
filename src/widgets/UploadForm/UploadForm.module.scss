@@ -11,7 +11,7 @@
   justify-content: space-between;
   align-items: flex-start;
 
-  &>*:not(:last-child) {
+  & > *:not(:last-child) {
     margin-right: 20px;
- }
+  }
 }
