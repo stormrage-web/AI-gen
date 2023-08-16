@@ -1,42 +1,58 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./CardModal.module.scss";
 import Modal from "antd/lib/modal/Modal";
 import { Button } from "antd";
 import Form, { useForm } from "antd/lib/form/Form";
 import Input from "antd/lib/input/Input";
 import { ModalProps } from "antd/lib";
+import axios from "axios";
 
 interface CardModadProps extends ModalProps {
+	id: string;
 	src: string;
 }
 
-const CardModal = ({src, ...props}: CardModadProps) => {
+const CardModal = ({src, id, ...props}: CardModadProps) => {
+	const [prompt, setPrompt] = useState("");
 	const [form] = useForm();
 
+	const handleChange = (type: string) => {
+		axios.post("http://51.250.91.130:5000/action", { id, type }).then(result => {
+			console.log(result);
+		});
+	};
+
+	const handlePrompt = (prompt: string) => {
+		axios.post("http://51.250.91.130:5000/prompt", { id, prompt }).then(result => {
+			console.log(result);
+		});
+	};
+
 	return (
-		<Modal className={styles.wrapper} {...props}>
+		<Modal className={styles.wrapper} width={720} {...props}>
 			<Form
 				form={form}
 				name="horizontal_login"
 				layout="inline"
 				className={styles.form}
 			>
-				<Input className={styles.input}/>
-				<Button type="primary" htmlType="submit" className={styles.submit}>
+
+				<Input placeholder="Type your prompt" value={prompt} onChange={(e) => setPrompt(e.target.value)} className={styles.input} />
+				<Button type="primary" htmlType="submit" onClick={() => handlePrompt(prompt)} className={styles.submit}>
 					Submit
 				</Button>
 			</Form>
 			<div className={styles.group}>
 				<img src={src} className={styles.group__image} alt="item" />
 				<div className={styles.group__left}>
-					<Button type="primary" htmlType="submit" className={styles.changeButton}>
+					<Button type="primary" onClick={() => handleChange("white")} className={styles.changeButton}>
 						White background
 					</Button>
-					<Button type="primary" htmlType="submit" className={styles.changeButton}>
+					<Button type="primary" onClick={() => handleChange("context")} className={styles.changeButton}>
 						Context background
 					</Button>
-					<Button type="primary" htmlType="submit" className={styles.changeButton}>
-						Infographics
+					<Button type="primary" onClick={() => handleChange("info")} className={styles.changeButton}>
+						Delete infographics
 					</Button>
 				</div>
 			</div>

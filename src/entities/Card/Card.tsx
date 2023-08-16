@@ -4,23 +4,24 @@ import styles from "./Card.module.scss";
 import CardModal from "../CardModal/CardModal";
 
 export interface CardProps {
-	src: string;
+	id: string;
+	url: string;
 	name: string;
 	modal?: boolean;
 }
 
-const Card = ({ src, name, modal }: CardProps) => {
+const Card = ({ url, name, modal, id }: CardProps) => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	return (
 		<div className={styles.wrapper}>
-			<img src={src} alt="item" className={styles.picture}/>
+			<img src={url} alt="item" className={styles.picture}/>
 			<div className={styles.group}>
 				<p>{name}</p>
 				{modal && (
 					<>
 						<Button type="primary" onClick={() => setIsModalOpen(true)}>Change</Button>
-						<CardModal src={src} open={isModalOpen} onCancel={() => setIsModalOpen(false)} footer={[]}/>
+						<CardModal src={url} id={id} open={isModalOpen} onCancel={() => setIsModalOpen(false)} footer={[]}/>
 					</>
 				)}
 			</div>

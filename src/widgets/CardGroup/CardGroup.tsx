@@ -1,15 +1,19 @@
 import React from "react";
 import styles from "./CardGroup.module.scss";
 import Card from "../../entities/Card/Card";
+import Item from "../../models/Item";
 
-const CardGroup = () => {
+export interface CardGroupProps {
+	items: Item[];
+	modal?: boolean;
+}
+
+const CardGroup = ({ items, modal }: CardGroupProps) => {
 	return (
 		<div className={styles.wrapper}>
-			<Card src={"https://ir.ozone.ru/s3/multimedia-k/wc250/6575201144.jpg"} name={"picture.jpg"} modal />
-			<Card src={"https://ir.ozone.ru/s3/multimedia-k/wc250/6575201144.jpg"} name={"picture.jpg"} />
-			<Card src={"https://ir.ozone.ru/s3/multimedia-k/wc250/6575201144.jpg"} name={"picture.jpg"} />
-			<Card src={"https://ir.ozone.ru/s3/multimedia-k/wc250/6575201144.jpg"} name={"picture.jpg"} />
-			<Card src={"https://ir.ozone.ru/s3/multimedia-k/wc250/6575201144.jpg"} name={"picture.jpg"} />
+			{items.map((item) => (
+				<Card key={item.id} id={item.id} url={item.url} name={item.name} modal={modal} />
+			))}
 		</div>
 	);
 };
