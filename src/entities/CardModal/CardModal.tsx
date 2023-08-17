@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./CardModal.module.scss";
 import Modal from "antd/lib/modal/Modal";
 import { Button } from "antd";
@@ -6,6 +6,7 @@ import Form, { useForm } from "antd/lib/form/Form";
 import Input from "antd/lib/input/Input";
 import { ModalProps } from "antd/lib";
 import axios from "axios";
+import { CardsContext } from "../../pages/MainPage/MainPage";
 
 interface CardModadProps extends ModalProps {
 	id: string;
@@ -13,18 +14,37 @@ interface CardModadProps extends ModalProps {
 }
 
 const CardModal = ({src, id, ...props}: CardModadProps) => {
+	const [,,resultCards, setResultCards] = useContext(CardsContext);
 	const [prompt, setPrompt] = useState("");
 	const [form] = useForm();
 
 	const handleChange = (type: string) => {
 		axios.post("http://51.250.91.130:5000/action", { id, type }).then(result => {
 			console.log(result);
+			if (setResultCards) {
+				const prev = [...resultCards];
+				const prevInd = prev.findIndex(item => item.id === id);
+				if (prevInd) {
+					const item = {...prev[prevInd], url: result.data.url};
+					prev[prevInd] = item;
+					setResultCards(prev);
+				}
+			}
 		});
 	};
 
 	const handlePrompt = (prompt: string) => {
 		axios.post("http://51.250.91.130:5000/prompt", { id, prompt }).then(result => {
 			console.log(result);
+			if (setResultCards) {
+				const prev = [...resultCards];
+				const prevInd = prev.findIndex(item => item.id === id);
+				if (prevInd) {
+					const item = {...prev[prevInd], url: result.data.url};
+					prev[prevInd] = item;
+					setResultCards(prev);
+				}
+			}
 		});
 	};
 

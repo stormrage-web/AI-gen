@@ -76,6 +76,19 @@ const UploadForm = () => {
 				</Button>
 				<Button htmlType="button">Reset</Button>
 			</Form>
+			<code style={{whiteSpace: "pre-line"}}>
+				Пример JSON:
+				{"\n[\n" +
+					" {\n" +
+					"  \"id\": 10563370,\n" +
+					"  \"url\": \"http:\\/\\/avatars.mds.yandex.net\\/get-mpic\\/1911047\"\n" +
+					" },\n" +
+					" {\n" +
+					"  \"id\": 10563370,\n" +
+					"  \"url\": \"http:\\/\\/avatars.mds.yandex.net\\/get-mpic\\/1912364\"\n" +
+					" }\n" +
+					"]"}
+			</code>
 		</div>
 	);
 };
