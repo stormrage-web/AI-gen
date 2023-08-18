@@ -77,9 +77,6 @@ const CardModal = ({src, id, ...props}: CardModadProps) => {
 					<Button type="primary" onClick={() => handleChange("white")} className={styles.changeButton}>
 						White background
 					</Button>
-					<Button type="primary" onClick={() => handleChange("context")} className={styles.changeButton}>
-						Context background
-					</Button>
 					<Button type="primary" onClick={() => handleChange("info")} className={styles.changeButton}>
 						Delete infographics
 					</Button>
