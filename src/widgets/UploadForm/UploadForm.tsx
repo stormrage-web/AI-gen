@@ -4,7 +4,6 @@ import Form, { useForm } from "antd/lib/form/Form";
 import Upload from "antd/lib/upload/Upload";
 import { Button, UploadProps } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-import axios from "axios";
 import { message } from "antd/lib";
 import { CardsContext } from "../../pages/MainPage/MainPage";
 
@@ -23,24 +22,25 @@ const UploadForm = () => {
 			const reader = new FileReader();
 
 			reader.onload = (e) => {
-				if (setCards) {
+				if (setCards && setResultCards) {
 					setCards(JSON.parse(e.target?.result as string));
+					setResultCards(JSON.parse(e.target?.result as string));
 				}
-				axios
-					.get(
-						"http://51.250.91.130:5000/source?files=" +
-						JSON.stringify(
-							JSON.parse(e.target?.result as string),
-						),
-					)
-					.then((result) => {
-						console.log(result.data);
-						if (setResultCards)
-							setResultCards(result.data.map((item: any) => ({id: item.id, url: item.generated[item.generated.length - 1].url})));
-					})
-					.catch(() => {
-						console.log("axios error");
-					});
+				// axios
+				// 	.get(
+				// 		"http://51.250.91.130:5000/source?files=" +
+				// 		JSON.stringify(
+				// 			JSON.parse(e.target?.result as string),
+				// 		),
+				// 	)
+				// 	.then((result) => {
+				// 		console.log(result.data);
+				// 		if (setResultCards)
+				// 			setResultCards(result.data.map((item: any) => ({id: item.id, url: item.generated[item.generated.length - 1].url})));
+				// 	})
+				// 	.catch(() => {
+				// 		console.log("axios error");
+				// 	});
 			};
 			reader.readAsText(file);
 
